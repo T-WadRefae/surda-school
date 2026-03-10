@@ -112,15 +112,12 @@
 
             <!-- رابط الحصة -->
             <div class="form-group full">
-              <label for="f-link">🔗 رابط حصة Teams <span style="color:#64748b;font-weight:400;font-size:0.82rem;">(الصق الرابط أو نص الدعوة كاملاً – سيُستخرج الرابط تلقائياً)</span></label>
+              <label for="f-link">🔗 رابط حصة Teams</label>
               <input
-                type="text"
+                type="url"
                 id="f-link"
-                placeholder="الصق رابط Teams أو نص الدعوة كاملاً هنا..."
-                oninput="autoExtractLink(this)"
-                style="direction:ltr;text-align:left;"
+                placeholder="https://teams.microsoft.com/..."
               />
-              <span id="f-link-preview" style="font-size:0.8rem;color:#16a34a;margin-top:4px;display:none;">✅ تم استخراج الرابط</span>
             </div>
 
           </div>
@@ -206,11 +203,8 @@
         </div>
 
         <div class="form-group full">
-          <label for="e-link">رابط الحصة <span style="color:#64748b;font-weight:400;font-size:0.82rem;">(الصق الرابط أو نص الدعوة كاملاً)</span></label>
-          <input type="text" id="e-link" placeholder="الصق رابط Teams أو نص الدعوة هنا..."
-            oninput="autoExtractLink(this)"
-            style="direction:ltr;text-align:left;" />
-          <span id="e-link-preview" style="font-size:0.8rem;color:#16a34a;margin-top:4px;display:none;">✅ تم استخراج الرابط</span>
+          <label for="e-link">رابط الحصة</label>
+          <input type="url" id="e-link" placeholder="https://teams.microsoft.com/..." />
         </div>
 
       </div>
