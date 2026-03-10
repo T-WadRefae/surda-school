@@ -7,7 +7,7 @@
    ضع رابط الـ Web App هنا ↓
 =================================== */
 
-const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8ZvymEEpnufhNyDsLYtY4KK4C3jl_u4nv3xnWz4tc3Nxd60amRgiXQENZ7gp1gRRmdg/exec';
 
 // ===================================
 // مواعيد الحصص
@@ -362,7 +362,7 @@ async function handleSave() {
   const grade    = document.getElementById('f-grade')?.value;
   const period   = document.getElementById('f-period')?.value;
   const subject  = document.getElementById('f-subject')?.value;
-  const link     = cleanLink(document.getElementById('f-link')?.value || '');
+  const link     = document.getElementById('f-link')?.value.trim();
   const attend   = document.getElementById('f-attendance')?.value.trim();
 
   if (!grade || !period || !subject) {
@@ -502,7 +502,7 @@ async function saveEdit() {
   const grade    = document.getElementById('e-grade')?.value;
   const period   = document.getElementById('e-period')?.value;
   const subject  = document.getElementById('e-subject')?.value;
-  const link     = cleanLink(document.getElementById('e-link')?.value || '');
+  const link     = document.getElementById('e-link')?.value.trim();
   const attend   = document.getElementById('e-attendance')?.value.trim();
 
   if (!grade || !period || !subject) {
@@ -534,74 +534,8 @@ async function saveEdit() {
 }
 
 // ===================================
-// تنظيف الرابط – استخراج أول رابط http من النص
+// تشغيل عند تحميل الصفحة
 // ===================================
-function cleanLink(raw) {
-  if (!raw) return '';
-  raw = raw.trim();
-  // إذا كان رابطاً نظيفاً
-  if (/^https?:\/\/\S+$/.test(raw)) return raw;
-  // استخراج أول رابط من النص
-  const m = raw.match(/(https?:\/\/[^\s"'<>]+)/i);
-  return m ? m[1].trim() : raw;
-}
-
-// ===================================
-// استخراج رابط Teams تلقائياً من النص
-// يقبل: رابط مباشر، نص دعوة كامل، مع مسافات أو أسطر زيادة
-// ===================================
-function autoExtractLink(input) {
-  const raw = input.value;
-
-  // أنماط روابط Teams المعروفة
-  const patterns = [
-    // رابط اجتماع مباشر
-    /(https?:\/\/teams\.microsoft\.com\/l\/meetup-join\/[^\s"'<>]+)/i,
-    // رابط channel
-    /(https?:\/\/teams\.microsoft\.com\/l\/channel\/[^\s"'<>]+)/i,
-    // رابط meet
-    /(https?:\/\/teams\.microsoft\.com\/meet\/[^\s"'<>]+)/i,
-    // أي رابط teams.microsoft.com
-    /(https?:\/\/teams\.microsoft\.com\/[^\s"'<>]+)/i,
-    // رابط teams.live.com
-    /(https?:\/\/teams\.live\.com\/[^\s"'<>]+)/i,
-    // أي رابط https عام كبديل أخير
-    /(https?:\/\/[^\s"'<>]{10,})/i,
-  ];
-
-  let extracted = null;
-
-  for (const pattern of patterns) {
-    const match = raw.match(pattern);
-    if (match) {
-      // تنظيف الرابط: إزالة مسافات وأسطر من الطرفين
-      extracted = match[1].trim().replace(/[\r\n\t]+/g, '');
-      break;
-    }
-  }
-
-  const previewId = input.id === 'f-link' ? 'f-link-preview' : 'e-link-preview';
-  const preview = document.getElementById(previewId);
-
-  if (extracted && extracted !== raw.trim()) {
-    // وجدنا رابطاً مختلفاً عن المدخل — نستبدل القيمة تلقائياً
-    input.value = extracted;
-    if (preview) {
-      preview.style.display = 'block';
-      preview.textContent = '✅ تم استخراج الرابط تلقائياً';
-    }
-  } else if (extracted) {
-    // المدخل هو رابط نظيف أصلاً
-    if (preview) {
-      preview.style.display = 'block';
-      preview.textContent = '✅ رابط صحيح';
-    }
-  } else {
-    if (preview) preview.style.display = 'none';
-  }
-}
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
 
