@@ -157,6 +157,14 @@ body {
 .card-icon { font-size: 3rem; margin-bottom: 8px; filter: drop-shadow(0 3px 4px rgba(0,0,0,.2)); }
 .card-title { font-size: 1.35rem; font-weight: 800; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.35); }
 .card-desc  { font-size: .9rem; color: #fff; opacity: .92; margin-top: 4px; text-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.card-teacher {
+  font-size: .82rem; color: #fff; font-weight: 700; margin-top: 6px;
+  background: rgba(0,0,0,.18); padding: 3px 12px; border-radius: 999px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+/* بطاقة القسم: واضح إنها قابلة للضغط بالكامل */
+.game-card[data-section] { cursor: pointer; }
 
 .play-btn {
   margin-top: 14px;
@@ -169,6 +177,8 @@ body {
   transition: transform .15s ease, filter .15s ease;
 }
 .play-btn:hover { transform: scale(1.06); filter: brightness(1.08); }
+.play-btn.is-soon { opacity: .72; cursor: default; }
+.play-btn.is-soon:hover { transform: none; filter: none; }
 
 /* ألوان البطاقات */
 .card-green  { background: linear-gradient(160deg, #6fae72, #3f7d54); }
@@ -266,19 +276,6 @@ body {
 .dash-section h2 { color: #2f4f7f; font-size: 1.2rem; margin-bottom: 14px; }
 .dash-note { color: #6b7280; font-size: .9rem; margin-bottom: 14px; line-height: 1.7; }
 .dash-note a { color: #4a6fa5; font-weight: 700; }
-
-/* قسم GitHub */
-.gh-section { border: 1px solid #e3e9f0; }
-.gh-row { display: flex; gap: 10px; flex-wrap: wrap; }
-.gh-row input {
-  flex: 1; min-width: 200px; padding: 11px 13px; font-family: inherit; font-size: 1rem;
-  border: 2px solid #d7dee6; border-radius: 10px;
-}
-.gh-row input:focus { outline: none; border-color: #4a6fa5; }
-.gh-row .dash-btn { width: auto; flex: 0 0 auto; }
-.gh-status { margin-top: 12px; font-weight: 700; font-size: .92rem; color: #6b7280; }
-.gh-status.ok  { color: #2f8a4e; }
-.gh-status.err { color: #d23b3b; }
 
 .game-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .game-form label { display: flex; flex-direction: column; gap: 5px; font-weight: 700; color: #374151; font-size: .92rem; }

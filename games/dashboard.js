@@ -84,7 +84,7 @@
         '<div class="game-item is-default">' +
           '<span class="gi-icon">' + esc(g.icon || "🎮") + '</span>' +
           '<div class="gi-body"><strong>' + esc(g.title) + '</strong>' +
-            '<small>' + esc(sectionTitle(g.section)) + ' · ' + (COLOR_NAMES[g.color] || g.color) +
+            '<small>' + esc(sectionTitle(g.section)) + (g.teacher ? ' · 👩‍🏫 ' + esc(g.teacher) : '') + ' · ' + (COLOR_NAMES[g.color] || g.color) +
             (g.link && g.link !== "#" ? ' · ' + esc(g.link) : "") + '</small></div>' +
           '<span class="gi-badge">منشورة</span>' +
         '</div>';
@@ -100,7 +100,7 @@
             '<span class="gi-icon">' + esc(g.icon || "🎮") + '</span>' +
             '<div class="gi-body"><strong>' + esc(g.title) + '</strong> ' +
               '<span class="gi-badge draft">مسودّة</span>' +
-              '<small>' + esc(sectionTitle(g.section)) + ' · ' + (COLOR_NAMES[g.color] || g.color) +
+              '<small>' + esc(sectionTitle(g.section)) + (g.teacher ? ' · 👩‍🏫 ' + esc(g.teacher) : '') + ' · ' + (COLOR_NAMES[g.color] || g.color) +
               (g.link && g.link !== "#" ? ' · ' + esc(g.link) : "") + '</small></div>' +
             '<div class="gi-actions">' +
               '<button class="gi-edit" data-id="' + esc(g.id) + '">تعديل</button>' +
@@ -133,6 +133,7 @@
 
     $("g-title").value   = game.title || "";
     $("g-section").value = game.section || "";
+    $("g-teacher").value = game.teacher || "";
     $("g-desc").value    = game.desc || "";
     $("g-icon").value    = game.icon && game.icon !== "🎮" ? game.icon : "";
     $("g-color").value   = game.color || "green";
@@ -164,6 +165,7 @@
     var fields = {
       title: title,
       section: $("g-section").value,
+      teacher: $("g-teacher").value.trim(),
       desc: $("g-desc").value.trim(),
       icon: $("g-icon").value.trim() || "🎮",
       color: $("g-color").value,

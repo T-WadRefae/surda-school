@@ -119,14 +119,21 @@
     }
 
     wrap.innerHTML = games.map(function (g) {
-      var link = g.link && g.link !== "#" ? esc(g.link) : "#";
-      var target = (link !== "#" && /^https?:/i.test(g.link)) ? ' target="_blank" rel="noopener"' : "";
+      var hasLink = g.link && g.link !== "#";
+      var playBtn;
+      if (hasLink) {
+        var target = /^https?:/i.test(g.link) ? ' target="_blank" rel="noopener"' : "";
+        playBtn = '<a class="play-btn" href="' + esc(g.link) + '"' + target + '>العب الآن</a>';
+      } else {
+        playBtn = '<span class="play-btn is-soon">قريباً</span>';
+      }
       return (
         '<article class="game-card ' + (COLORS[g.color] || COLORS.green) + '">' +
           '<div class="card-icon">' + esc(g.icon || "🎮") + '</div>' +
           '<h3 class="card-title">' + esc(g.title) + '</h3>' +
           (g.desc ? '<p class="card-desc">' + esc(g.desc) + '</p>' : '') +
-          '<a class="play-btn" href="' + link + '"' + target + '>العب الآن</a>' +
+          (g.teacher ? '<p class="card-teacher">👩‍🏫 ' + esc(g.teacher) + '</p>' : '') +
+          playBtn +
         '</article>'
       );
     }).join("");
