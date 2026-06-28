@@ -1,12 +1,12 @@
 /* ===========================================================
-   صفحة تحديات وطن وهند — عرض بطاقات الألعاب
+   صفحة تحديات وطن وهند
+   الطالب يختار القسم أولاً ثم يرى بطاقات ألعاب ذلك القسم
    =========================================================== */
 (function () {
   "use strict";
 
   var STORAGE_KEY = "surda_camp_games";
 
-  // ألوان البطاقات المتاحة
   var COLORS = {
     green:  "card-green",
     blue:   "card-blue",
@@ -16,7 +16,6 @@
     teal:   "card-teal"
   };
 
-  // قراءة الألعاب المُضافة من لوحة التحكم
   function getCustomGames() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -26,10 +25,23 @@
     }
   }
 
-  // دمج الألعاب الافتراضية مع المُضافة
-  function getAllGames() {
-    var defaults = window.DEFAULT_GAMES || [];
-    return defaults.concat(getCustomGames());
+  function getAllGames()  { return (window.DEFAULT_GAMES || []).concat(getCustomGames()); }
+  function getSections()  { return window.SECTIONS || []; }
+
+  function gamesInSection(id) {
+    return getAllGames().filter(function (g) { return (g.section || "") === id; });
+  }
+
+  function sectionsWithGames() {
+    var all = getAllGames();
+    return getSections().filter(function (s) {
+      return all.some(function (g) { return (g.section || "") === s.id; });
+    });
+  }
+
+  function currentSectionId() {
+    var m = location.hash.match(/#\/section\/(.+)$/);
+    return m ? decodeURIComponent(m[1]) : null;
   }
 
   function esc(s) {
@@ -38,22 +50,60 @@
     });
   }
 
-  function render() {
-    var wrap = document.getElementById("cards");
-    if (!wrap) return;
+  /* ---------- عرض الأقسام ---------- */
+  function renderSections(wrap, bar) {
+    bar.hidden = true;
+    bar.innerHTML = "";
 
-    var games = getAllGames();
-    if (!games.length) {
+    var secs = sectionsWithGames();
+    if (!secs.length) {
       wrap.innerHTML = '<div class="cards-loading">لا توجد ألعاب بعد</div>';
       return;
     }
 
+    wrap.innerHTML = secs.map(function (s) {
+      var n = gamesInSection(s.id).length;
+      var label = n + " " + (n === 1 ? "لعبة" : (n === 2 ? "لعبتان" : "ألعاب"));
+      return (
+        '<article class="game-card ' + (COLORS[s.color] || COLORS.green) + '" data-section="' + esc(s.id) + '">' +
+          '<div class="card-icon">' + esc(s.icon || "📚") + '</div>' +
+          '<h3 class="card-title">' + esc(s.title) + '</h3>' +
+          '<p class="card-desc">' + label + '</p>' +
+          '<button class="play-btn" type="button">ادخل</button>' +
+        '</article>'
+      );
+    }).join("");
+
+    Array.prototype.forEach.call(wrap.querySelectorAll(".game-card"), function (card) {
+      card.addEventListener("click", function () {
+        location.hash = "#/section/" + encodeURIComponent(card.getAttribute("data-section"));
+      });
+    });
+  }
+
+  /* ---------- عرض ألعاب قسم ---------- */
+  function renderGames(wrap, bar, sectionId) {
+    var sec = getSections().filter(function (s) { return s.id === sectionId; })[0];
+
+    bar.hidden = false;
+    bar.innerHTML =
+      '<button class="back-btn" type="button">⬅ كل الأقسام</button>' +
+      '<span class="section-title">' + esc(sec ? (sec.icon + " " + sec.title) : "القسم") + '</span>';
+    bar.querySelector(".back-btn").addEventListener("click", function () {
+      location.hash = "";
+    });
+
+    var games = gamesInSection(sectionId);
+    if (!games.length) {
+      wrap.innerHTML = '<div class="cards-loading">لا توجد ألعاب في هذا القسم بعد</div>';
+      return;
+    }
+
     wrap.innerHTML = games.map(function (g) {
-      var colorClass = COLORS[g.color] || COLORS.green;
       var link = g.link && g.link !== "#" ? esc(g.link) : "#";
       var target = (link !== "#" && /^https?:/i.test(g.link)) ? ' target="_blank" rel="noopener"' : "";
       return (
-        '<article class="game-card ' + colorClass + '">' +
+        '<article class="game-card ' + (COLORS[g.color] || COLORS.green) + '">' +
           '<div class="card-icon">' + esc(g.icon || "🎮") + '</div>' +
           '<h3 class="card-title">' + esc(g.title) + '</h3>' +
           (g.desc ? '<p class="card-desc">' + esc(g.desc) + '</p>' : '') +
@@ -63,8 +113,18 @@
     }).join("");
   }
 
-  document.addEventListener("DOMContentLoaded", render);
+  /* ---------- التوجيه ---------- */
+  function render() {
+    var wrap = document.getElementById("cards");
+    var bar  = document.getElementById("section-bar");
+    if (!wrap || !bar) return;
 
-  // إعادة الرسم عند العودة للصفحة (مثلاً بعد الإضافة من لوحة التحكم)
+    var sid = currentSectionId();
+    if (sid) renderGames(wrap, bar, sid);
+    else     renderSections(wrap, bar);
+  }
+
+  document.addEventListener("DOMContentLoaded", render);
+  window.addEventListener("hashchange", render);
   window.addEventListener("focus", render);
 })();

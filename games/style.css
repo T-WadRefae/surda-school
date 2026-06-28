@@ -115,15 +115,32 @@ body {
 }
 
 /* ===== البطاقات ===== */
+.cards-col { align-self: center; width: 100%; }
+
+/* شريط القسم (زر الرجوع + اسم القسم) */
+.section-bar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.back-btn {
+  background: #fff; color: #b0392f; border: 2px solid var(--gold);
+  border-radius: 999px; padding: 7px 18px; font-family: inherit; font-weight: 800;
+  cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,.12); transition: transform .15s ease, background .15s ease;
+}
+.back-btn:hover { background: #b0392f; color: #fff; transform: scale(1.04); }
+.section-title {
+  font-weight: 900; font-size: 1.5rem; color: #b0392f;
+  text-shadow: 0 2px 0 #fff, 0 3px 6px rgba(0,0,0,.12);
+}
+
 .cards {
-  align-self: center;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
   justify-content: center;
   gap: 18px;
   padding: 6px;
 }
-.cards-loading { grid-column: 1/-1; text-align: center; padding: 30px; color: #6b7280; }
+.cards-loading { grid-column: 1/-1; text-align: center; padding: 30px; color: #5a6b48; font-weight: 700; }
 
 .game-card {
   border-radius: 18px;

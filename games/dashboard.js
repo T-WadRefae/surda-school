@@ -16,10 +16,27 @@
   // معرّف اللعبة قيد التعديل (null = وضع الإضافة)
   var editingId = null;
 
+  function getSections() { return window.SECTIONS || []; }
+
+  function sectionTitle(id) {
+    var s = getSections().filter(function (x) { return x.id === id; })[0];
+    return s ? s.title : (id || "—");
+  }
+
+  // تعبئة قائمة الأقسام في النموذج
+  function fillSectionSelect() {
+    var sel = document.getElementById("g-section");
+    if (!sel) return;
+    sel.innerHTML = getSections().map(function (s) {
+      return '<option value="' + esc(s.id) + '">' + esc(s.icon + " " + s.title) + '</option>';
+    }).join("");
+  }
+
   /* ---------- كلمة المرور ---------- */
   function unlock() {
     document.getElementById("lock-screen").hidden = true;
     document.getElementById("dash").hidden = false;
+    fillSectionSelect();
     renderList();
   }
 
@@ -66,7 +83,7 @@
         '<div class="game-item is-default">' +
           '<span class="gi-icon">' + esc(g.icon || "🎮") + '</span>' +
           '<div class="gi-body"><strong>' + esc(g.title) + '</strong>' +
-            '<small>' + esc(g.desc || "") + ' · ' + (COLOR_NAMES[g.color] || g.color) + '</small></div>' +
+            '<small>' + esc(sectionTitle(g.section)) + ' · ' + (COLOR_NAMES[g.color] || g.color) + '</small></div>' +
           '<span class="gi-badge">أساسية</span>' +
         '</div>';
     });
@@ -81,7 +98,7 @@
           '<div class="game-item' + editing + '">' +
             '<span class="gi-icon">' + esc(g.icon || "🎮") + '</span>' +
             '<div class="gi-body"><strong>' + esc(g.title) + '</strong>' +
-              '<small>' + esc(g.desc || "") + ' · ' + (COLOR_NAMES[g.color] || g.color) +
+              '<small>' + esc(sectionTitle(g.section)) + ' · ' + (COLOR_NAMES[g.color] || g.color) +
               (g.link && g.link !== "#" ? ' · ' + esc(g.link) : "") + '</small></div>' +
             '<div class="gi-actions">' +
               '<button class="gi-edit" data-id="' + esc(g.id) + '">تعديل</button>' +
@@ -115,11 +132,12 @@
     if (!game) return;
     editingId = id;
 
-    document.getElementById("g-title").value = game.title || "";
-    document.getElementById("g-desc").value  = game.desc || "";
-    document.getElementById("g-icon").value  = game.icon && game.icon !== "🎮" ? game.icon : "";
-    document.getElementById("g-color").value = game.color || "green";
-    document.getElementById("g-link").value  = game.link && game.link !== "#" ? game.link : "";
+    document.getElementById("g-title").value   = game.title || "";
+    document.getElementById("g-section").value = game.section || "";
+    document.getElementById("g-desc").value    = game.desc || "";
+    document.getElementById("g-icon").value    = game.icon && game.icon !== "🎮" ? game.icon : "";
+    document.getElementById("g-color").value   = game.color || "green";
+    document.getElementById("g-link").value    = game.link && game.link !== "#" ? game.link : "";
 
     document.getElementById("form-heading").textContent = "✏️ تعديل اللعبة";
     document.getElementById("save-btn").textContent = "تحديث اللعبة";
@@ -147,6 +165,7 @@
 
     var fields = {
       title: title,
+      section: document.getElementById("g-section").value,
       desc: document.getElementById("g-desc").value.trim(),
       icon: document.getElementById("g-icon").value.trim() || "🎮",
       color: document.getElementById("g-color").value,
