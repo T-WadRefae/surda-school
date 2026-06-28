@@ -320,6 +320,9 @@ body {
 .gi-del:hover { background: #d23b3b; color: #fff; }
 .game-item.is-editing { outline: 3px solid #4a6fa5; outline-offset: 1px; }
 .dash-empty { color: #9ca3af; text-align: center; padding: 14px; }
+.save-status { grid-column: 1/-1; font-weight: 700; font-size: .92rem; margin-top: 2px; min-height: 20px; color: #6b7280; }
+.save-status.ok  { color: #2f8a4e; }
+.save-status.err { color: #d23b3b; }
 
 @media (max-width: 560px) {
   .game-form { grid-template-columns: 1fr; }

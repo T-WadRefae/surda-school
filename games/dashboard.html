@@ -74,16 +74,14 @@
           <button type="submit" class="dash-btn" id="save-btn">حفظ اللعبة</button>
           <button type="button" class="dash-btn dash-btn-ghost" id="cancel-btn" hidden>إلغاء التعديل</button>
         </div>
+        <p class="save-status" id="save-status"></p>
       </form>
     </section>
 
     <!-- قائمة الألعاب -->
     <section class="dash-section">
       <h2>📋 الألعاب</h2>
-      <p class="dash-note">
-        الألعاب المعلَّمة بـ «منشورة» محفوظة في الموقع وتظهر لكل الطلاب بشكل دائم.
-        أي لعبة تضيفها هنا تظهر كـ «مسودّة على جهازك» — وعند رغبتك بنشرها للجميع، فقط أخبر المساعد ليحفظها في الموقع تلقائياً.
-      </p>
+      <p class="dash-note" id="list-note">كل الألعاب هنا محفوظة بشكل دائم وتظهر لجميع الطلاب.</p>
       <div id="game-list" class="game-list"></div>
     </section>
   </main>

@@ -20,7 +20,10 @@
   var PUBLISHED = null;
 
   function loadGames() {
-    var url = (window.GAMES_DATA_URL || "games-data.json") + "?cb=" + Date.now();
+    var api = window.GAMES_API_URL;
+    var url = api
+      ? api + (api.indexOf("?") > -1 ? "&" : "?") + "action=get&cb=" + Date.now()
+      : (window.GAMES_DATA_URL || "games-data.json") + "?cb=" + Date.now();
     return fetch(url, { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
       .then(function (data) {
@@ -32,6 +35,7 @@
   }
 
   function getDrafts() {
+    if (window.GAMES_API_URL) return []; // الشيت هو المصدر — لا حاجة للمسودّات المحلية
     try { var r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : []; }
     catch (e) { return []; }
   }
