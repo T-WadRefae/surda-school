@@ -306,6 +306,7 @@ body {
 .gi-body strong { color: #2f4f7f; }
 .gi-body small { color: #6b7280; }
 .gi-badge { background: #e9c47a; color: #6b4e10; font-weight: 700; font-size: .78rem; padding: 3px 10px; border-radius: 999px; }
+.gi-badge.draft { background: #dbe6f5; color: #2f4f7f; align-self: flex-start; margin: 2px 0; }
 .gi-actions { display: flex; gap: 8px; flex-shrink: 0; }
 .gi-edit, .gi-del {
   border-radius: 8px; padding: 7px 14px; font-family: inherit; font-weight: 700; cursor: pointer;

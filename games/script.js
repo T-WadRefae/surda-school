@@ -14,23 +14,37 @@
     teal:   "card-teal"
   };
 
-  // الألعاب تُحمّل من games-data.json (المصدر الدائم)
-  var GAMES = null;
+  var STORAGE_KEY = "surda_camp_games"; // مسودّات محلية (معاينة على نفس الجهاز)
+
+  // الألعاب المنشورة تُحمّل من games-data.json (المصدر الدائم للجميع)
+  var PUBLISHED = null;
 
   function loadGames() {
     var url = (window.GAMES_DATA_URL || "games-data.json") + "?cb=" + Date.now();
     return fetch(url, { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
       .then(function (data) {
-        GAMES = (data && Array.isArray(data.games)) ? data.games : [];
+        PUBLISHED = (data && Array.isArray(data.games)) ? data.games : [];
       })
       .catch(function () {
-        // احتياطي عند تعذّر التحميل
-        GAMES = window.FALLBACK_GAMES || [];
+        PUBLISHED = window.FALLBACK_GAMES || [];
       });
   }
 
-  function getAllGames()  { return GAMES || []; }
+  function getDrafts() {
+    try { var r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : []; }
+    catch (e) { return []; }
+  }
+
+  // المنشورة + المسودّات (المنشورة لها الأولوية عند تطابق المعرّف)
+  function getAllGames() {
+    var pub = PUBLISHED || [];
+    var seen = {};
+    pub.forEach(function (g) { seen[g.id] = true; });
+    var drafts = getDrafts().filter(function (g) { return !seen[g.id]; });
+    return pub.concat(drafts);
+  }
+
   function getSections()  { return window.SECTIONS || []; }
 
   function gamesInSection(id) {
@@ -134,6 +148,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", boot);
-  window.addEventListener("hashchange", function () { if (GAMES) render(); else boot(); });
+  window.addEventListener("hashchange", function () { if (PUBLISHED) render(); else boot(); });
   window.addEventListener("focus", boot);
 })();

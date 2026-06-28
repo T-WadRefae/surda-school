@@ -31,21 +31,6 @@
       <a href="index.html" class="dash-link">← العودة للصفحة الرئيسية</a>
     </header>
 
-    <!-- ربط GitHub للحفظ الدائم -->
-    <section class="dash-section gh-section">
-      <h2>🔗 الحفظ الدائم (GitHub)</h2>
-      <p class="dash-note">
-        أدخل رمز وصول GitHub مرة واحدة ليتم حفظ الألعاب مباشرة في الموقع وتظهر لكل الطلاب وتبقى دائمة.
-        الرمز يُحفظ في هذا المتصفح فقط ولا يُرسل لأي مكان غير GitHub.
-        <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">إنشاء رمز ←</a>
-      </p>
-      <div class="gh-row">
-        <input type="password" id="gh-token" placeholder="ghp_... أو github_pat_..." autocomplete="off" />
-        <button type="button" class="dash-btn" id="gh-save">حفظ الرمز</button>
-      </div>
-      <div class="gh-status" id="gh-status">غير مُتصل — أدخل الرمز للحفظ الدائم.</div>
-    </section>
-
     <!-- إضافة لعبة -->
     <section class="dash-section">
       <h2 id="form-heading">➕ إضافة لعبة جديدة</h2>
@@ -90,8 +75,11 @@
 
     <!-- قائمة الألعاب -->
     <section class="dash-section">
-      <h2>📋 الألعاب الحالية</h2>
-      <p class="dash-note">كل الألعاب هنا محفوظة في الموقع وتظهر لجميع الطلاب. أي إضافة أو تعديل أو حذف يُحفظ مباشرة في GitHub.</p>
+      <h2>📋 الألعاب</h2>
+      <p class="dash-note">
+        الألعاب المعلَّمة بـ «منشورة» محفوظة في الموقع وتظهر لكل الطلاب بشكل دائم.
+        أي لعبة تضيفها هنا تظهر كـ «مسودّة على جهازك» — وعند رغبتك بنشرها للجميع، فقط أخبر المساعد ليحفظها في الموقع تلقائياً.
+      </p>
       <div id="game-list" class="game-list"></div>
     </section>
   </main>
