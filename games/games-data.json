@@ -1,13 +1,3 @@
 {
-  "games": [
-    {
-      "id": "english-1",
-      "title": "تعلّم الإنجليزية",
-      "section": "english",
-      "desc": "العب وتعلّم الحروف والكلمات",
-      "icon": "🔤",
-      "color": "green",
-      "link": "#"
-    }
-  ]
+  "games": []
 }

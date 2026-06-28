@@ -36,12 +36,17 @@
     catch (e) { return []; }
   }
 
-  // المنشورة + المسودّات (المنشورة لها الأولوية عند تطابق المعرّف)
+  // المنشورة + المسودّات (المنشورة لها الأولوية؛ نُخفي أي مسودّة تطابق منشورة بالمعرّف أو بالاسم+القسم)
   function getAllGames() {
     var pub = PUBLISHED || [];
-    var seen = {};
-    pub.forEach(function (g) { seen[g.id] = true; });
-    var drafts = getDrafts().filter(function (g) { return !seen[g.id]; });
+    var byId = {}, byKey = {};
+    pub.forEach(function (g) {
+      byId[g.id] = true;
+      byKey[(g.section || "") + "|" + (g.title || "").trim()] = true;
+    });
+    var drafts = getDrafts().filter(function (g) {
+      return !byId[g.id] && !byKey[(g.section || "") + "|" + (g.title || "").trim()];
+    });
     return pub.concat(drafts);
   }
 
@@ -87,7 +92,8 @@
         '<article class="game-card ' + (COLORS[s.color] || COLORS.green) + '" data-section="' + esc(s.id) + '">' +
           '<div class="card-icon">' + esc(s.icon || "📚") + '</div>' +
           '<h3 class="card-title">' + esc(s.title) + '</h3>' +
-          '<p class="card-desc">' + label + '</p>' +
+          (s.desc ? '<p class="card-desc">' + esc(s.desc) + '</p>' : '') +
+          '<p class="card-count">' + label + '</p>' +
           '<button class="play-btn" type="button">ادخل</button>' +
         '</article>'
       );

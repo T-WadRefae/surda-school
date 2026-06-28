@@ -6,27 +6,17 @@
    FALLBACK_GAMES: قائمة احتياطية تظهر فقط إذا تعذّر تحميل الملف.
    =========================================================== */
 
-/* الأقسام المتاحة */
+/* الأقسام المتاحة (desc = سطر المعلومات الذي يظهر على بطاقة القسم) */
 window.SECTIONS = [
-  { id: "english", title: "اللغة الإنجليزية",   icon: "🔤", color: "green"  },
-  { id: "arabic",  title: "اللغة العربية",      icon: "📖", color: "teal"   },
-  { id: "math",    title: "الرياضيات",          icon: "🧮", color: "blue"   },
-  { id: "science", title: "العلوم",             icon: "🔬", color: "purple" },
-  { id: "social", title: "الدراسات الاجتماعية",  icon: "🧭", color: "gold"   }
+  { id: "english", title: "اللغة الإنجليزية",   icon: "🔤", color: "green",  desc: "حروف وكلمات وألعاب بالإنجليزية" },
+  { id: "arabic",  title: "اللغة العربية",      icon: "📖", color: "teal",   desc: "قراءة وإملاء ونحو" },
+  { id: "math",    title: "الرياضيات",          icon: "🧮", color: "blue",   desc: "أرقام وحساب وتحدّيات ذكاء" },
+  { id: "science", title: "العلوم",             icon: "🔬", color: "purple", desc: "تجارب واكتشافات ممتعة" },
+  { id: "social", title: "الدراسات الاجتماعية", icon: "🧭", color: "gold",   desc: "وطن وتاريخ وجغرافيا" }
 ];
 
 /* مسار ملف البيانات الدائم (المصدر الحقيقي للألعاب) */
 window.GAMES_DATA_URL = "games-data.json";
 
 /* قائمة احتياطية تظهر فقط إذا تعذّر تحميل games-data.json */
-window.FALLBACK_GAMES = [
-  {
-    id: "english-1",
-    title: "تعلّم الإنجليزية",
-    desc: "العب وتعلّم الحروف والكلمات",
-    icon: "🔤",
-    color: "green",
-    section: "english",
-    link: "#"
-  }
-];
+window.FALLBACK_GAMES = [];
