@@ -18,4 +18,15 @@ window.SECTIONS = [
 /* مسار ملف البيانات الدائم (المصدر الحقيقي للألعاب) */
 window.GAMES_DATA_URL = "games-data.json";
 
+/* قائمة احتياطية تظهر فقط إذا تعذّر تحميل games-data.json */
+window.FALLBACK_GAMES = [
+  {
+    id: "english-1",
+    title: "تعلّم الإنجليزية",
+    desc: "العب وتعلّم الحروف والكلمات",
+    icon: "🔤",
+    color: "green",
+    section: "english",
+    link: "#"
+  }
 ];
