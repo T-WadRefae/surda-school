@@ -12,7 +12,9 @@ window.SECTIONS = [
   { id: "arabic",  title: "اللغة العربية",      icon: "📖", color: "teal",   desc: "قراءة وإملاء ونحو" },
   { id: "math",    title: "الرياضيات",          icon: "🧮", color: "blue",   desc: "أرقام وحساب وتحدّيات ذكاء" },
   { id: "science", title: "العلوم",             icon: "🔬", color: "purple", desc: "تجارب واكتشافات ممتعة" },
-  { id: "social", title: "الدراسات الاجتماعية", icon: "🧭", color: "gold",   desc: "وطن وتاريخ وجغرافيا" }
+  { id: "social", title: "الدراسات الاجتماعية", icon: "🧭", color: "gold",   desc: "وطن وتاريخ وجغرافيا" },
+  { id: "islamic", title: "التربية الإسلامية",  icon: "🕌", color: "teal",   desc: "قرآن وأخلاق وسيرة" },
+  { id: "tech",   title: "التكنولوجيا والبرمجة", icon: "💻", color: "blue",   desc: "حاسوب وبرمجة وتفكير منطقي" }
 ];
 
 /* ===== مصدر الألعاب =====
