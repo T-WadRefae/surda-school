@@ -33,7 +33,7 @@
 
     <!-- إضافة لعبة -->
     <section class="dash-section">
-      <h2>➕ إضافة لعبة جديدة</h2>
+      <h2 id="form-heading">➕ إضافة لعبة جديدة</h2>
       <form id="game-form" class="game-form">
         <label>
           اسم اللعبة
@@ -62,7 +62,10 @@
           رابط اللعبة
           <input type="text" id="g-link" placeholder="https://… أو اتركه فارغاً" />
         </label>
-        <button type="submit" class="dash-btn">حفظ اللعبة</button>
+        <div class="form-actions">
+          <button type="submit" class="dash-btn" id="save-btn">حفظ اللعبة</button>
+          <button type="button" class="dash-btn dash-btn-ghost" id="cancel-btn" hidden>إلغاء التعديل</button>
+        </div>
       </form>
     </section>
 

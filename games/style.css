@@ -257,7 +257,12 @@ body {
   border: 2px solid #d7dee6; border-radius: 10px;
 }
 .game-form input:focus, .game-form select:focus { outline: none; border-color: #4a6fa5; }
-.game-form .dash-btn { grid-column: 1/-1; }
+.form-actions { grid-column: 1/-1; display: flex; gap: 10px; }
+.form-actions .dash-btn { flex: 1; }
+.dash-btn-ghost {
+  background: #eef1f6; color: #4a6fa5; border: 2px solid #d7dee6;
+}
+.dash-btn-ghost:hover { filter: none; background: #e3e8f0; }
 
 .game-list { display: flex; flex-direction: column; gap: 10px; }
 .game-item {
@@ -270,11 +275,15 @@ body {
 .gi-body strong { color: #2f4f7f; }
 .gi-body small { color: #6b7280; }
 .gi-badge { background: #e9c47a; color: #6b4e10; font-weight: 700; font-size: .78rem; padding: 3px 10px; border-radius: 999px; }
-.gi-del {
-  background: #fdecec; color: #d23b3b; border: 1px solid #f3c4c4;
+.gi-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.gi-edit, .gi-del {
   border-radius: 8px; padding: 7px 14px; font-family: inherit; font-weight: 700; cursor: pointer;
 }
+.gi-edit { background: #eaf1fb; color: #2f4f7f; border: 1px solid #c3d6ef; }
+.gi-edit:hover { background: #2f4f7f; color: #fff; }
+.gi-del { background: #fdecec; color: #d23b3b; border: 1px solid #f3c4c4; }
 .gi-del:hover { background: #d23b3b; color: #fff; }
+.game-item.is-editing { outline: 3px solid #4a6fa5; outline-offset: 1px; }
 .dash-empty { color: #9ca3af; text-align: center; padding: 14px; }
 
 @media (max-width: 560px) {
