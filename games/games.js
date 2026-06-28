@@ -19,7 +19,7 @@ window.SECTIONS = [
    ضعي هنا رابط الـ Web App الخاص بشيت Google (المنتهي بـ /exec)
    بمجرد وضعه: تصبح القراءة والحفظ من الشيت مباشرةً.
    إذا تُرك فارغاً: يُستخدم الملف الثابت games-data.json كبديل. */
-window.GAMES_API_URL = "";
+window.GAMES_API_URL = "https://script.google.com/macros/s/AKfycbzvEZaU39m64iiIVLceiMOvy36kx1u1fmkPVAPi2OyqgotAo-GTeidk__aoCbHUenOo/exec";
 
 /* بديل ثابت يُستخدم فقط إذا لم يُضبط GAMES_API_URL */
 window.GAMES_DATA_URL = "games-data.json";
