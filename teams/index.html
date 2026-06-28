@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مدرسة سردا الأساسية المختلطة – جدول حصص Teams</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="index">
+
+  <!-- ===== رأس الصفحة ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">🏫</div>
+      <div class="header-text">
+        <h1>مدرسة سردا الأساسية المختلطة</h1>
+        <p>جدول حصص Microsoft Teams اليومية</p>
+      </div>
+      <div class="header-date">
+        <div class="date-label">تاريخ اليوم</div>
+        <div class="date-val" id="today-date">—</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== المحتوى الرئيسي ===== -->
+  <main class="container">
+
+    <!-- شريط التحديث -->
+    <div class="refresh-bar">
+      <span id="data-source" style="color:#64748b;">جارٍ تحميل البيانات...</span>
+      <button class="btn btn-primary btn-sm" id="refresh-btn">🔄 تحديث</button>
+    </div>
+
+    <!-- جدول الحصص -->
+    <h2 class="section-title">📅 حصص اليوم</h2>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>الصف</th>
+            <th>الحصة</th>
+            <th>المادة</th>
+            <th>وقت الحصة</th>
+            <th>الحضور</th>
+            <th>وقت التسجيل</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-tbody">
+          <tr class="loading-row">
+            <td colspan="6">
+              <span class="spinner"></span>
+              جارٍ تحميل البيانات...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- زر دخول المعلم -->
+    <div class="teacher-btn-wrap">
+      <a href="teacher.html" class="btn btn-accent">
+        🔐 دخول المعلم
+      </a>
+    </div>
+
+    <!-- ===== جدول مواعيد الحصص ===== -->
+    <h2 class="section-title" style="margin-top:36px;">⏰ مواعيد الحصص</h2>
+
+    <div class="schedule-section">
+      <div class="schedule-grid">
+
+        <!-- الصفوف 1-4 -->
+        <div class="schedule-group">
+          <h3>📘 الصفوف من الأول إلى الرابع</h3>
+          <ul class="schedule-list" id="lower-schedule">
+            <!-- يُملأ بـ JavaScript -->
+          </ul>
+        </div>
+
+        <!-- الصفوف 5-9 -->
+        <div class="schedule-group">
+          <h3>📗 الصفوف من الخامس إلى التاسع</h3>
+          <ul class="schedule-list" id="upper-schedule">
+            <!-- يُملأ بـ JavaScript -->
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== تذييل الصفحة ===== -->
+  <footer class="site-footer">
+    مدرسة سردا الأساسية المختلطة &mdash; نظام إدارة حصص Microsoft Teams
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
