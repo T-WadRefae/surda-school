@@ -223,11 +223,16 @@ body {
   .hero-row { gap: 4px; }
   .cards { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 2px; }
   .game-card { min-height: 0; padding: 12px 7px; border-width: 3px; }
-  .card-icon { margin-bottom: 3px; }
-  .play-btn { margin-top: 10px; }
-  .char-name { font-size: .78rem; padding: 2px 10px; }
+  .card-icon { font-size: 1.7rem; margin-bottom: 3px; }
+  .card-title { font-size: .85rem; }
+  .card-desc { font-size: .68rem; }
+  .card-count { font-size: .64rem; }
+  .card-teacher { font-size: .64rem; padding: 2px 8px; }
+  .play-btn { font-size: .74rem; padding: 5px 14px; margin-top: 9px; }
+  .char-name { font-size: .74rem; padding: 2px 9px; }
   .section-bar { margin-bottom: 12px; }
-  .section-title { font-size: 1.15rem; }
+  .section-title { font-size: 1.05rem; }
+  .back-btn { font-size: .82rem; padding: 6px 14px; }
 }
 
 /* ===== موبايل صغير جداً ===== */
