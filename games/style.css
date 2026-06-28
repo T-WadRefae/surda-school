@@ -5,10 +5,13 @@
 [hidden] { display: none !important; }
 
 :root {
-  --sky-top:    #bfe3f7;
-  --sky-bottom: #e9f7df;
+  --sky-top:    #aee0f5;
+  --sky-mid:    #cdeaf3;
   --ink:        #4a3b2a;
   --gold:       #d4a531;
+  --frame:      #efe3c4;
+  /* طول وطن المرجعي (هند = 75% منه) */
+  --watan-h: clamp(200px, 27vw, 430px);
 }
 
 html, body { height: 100%; }
@@ -16,27 +19,48 @@ html, body { height: 100%; }
 body {
   font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
   color: var(--ink);
-  background: linear-gradient(180deg, var(--sky-top) 0%, #d4eed0 55%, var(--sky-bottom) 100%);
+  background:
+    linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 40%, #dcefd0 70%, #c6e6a8 100%);
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  padding-bottom: 80px;
 }
 
 /* ===== السحب ===== */
 .clouds { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.cloud { position: absolute; font-size: 60px; opacity: .85; filter: drop-shadow(0 4px 6px rgba(0,0,0,.05)); }
+.cloud { position: absolute; font-size: 60px; opacity: .9; filter: drop-shadow(0 4px 6px rgba(0,0,0,.05)); }
 .cloud-1 { top: 6%;  left: 8%;  animation: float 9s ease-in-out infinite; }
-.cloud-2 { top: 14%; right: 12%; font-size: 80px; animation: float 11s ease-in-out infinite; }
-.cloud-3 { top: 40%; left: 4%;  font-size: 46px; animation: float 8s ease-in-out infinite; }
+.cloud-2 { top: 12%; right: 14%; font-size: 80px; animation: float 11s ease-in-out infinite; }
+.cloud-3 { top: 34%; left: 4%;  font-size: 46px; animation: float 8s ease-in-out infinite; }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+/* ===== الأرض / الحديقة ===== */
+.ground {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 130px;
+  background: linear-gradient(180deg, #d8f0bd 0%, #a9dd86 45%, #84c45f 100%);
+  border-top: 4px solid #f2e7c9;
+  z-index: 0; pointer-events: none;
+}
+.ground .plant { position: absolute; bottom: 6px; font-size: 30px; filter: drop-shadow(0 2px 2px rgba(0,0,0,.1)); }
+.ground .p1 { left: 4%;  font-size: 34px; }
+.ground .p2 { left: 22%; }
+.ground .p3 { left: 40%; font-size: 26px; }
+.ground .p4 { left: 58%; }
+.ground .p5 { left: 76%; font-size: 34px; }
+.ground .p6 { left: 92%; font-size: 26px; }
 
 /* ===== المسرح ===== */
 .stage {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 28px 20px 40px;
+  max-width: 1180px;
+  margin: 16px auto;
+  padding: 24px 22px 30px;
+  background: linear-gradient(180deg, rgba(255,255,255,.32), rgba(255,255,255,.12));
+  border: 5px solid var(--frame);
+  border-radius: 28px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12), inset 0 0 0 2px rgba(255,255,255,.4);
 }
 
 /* ===== العنوان ===== */
@@ -52,32 +76,35 @@ body {
   letter-spacing: -1px;
 }
 .sun {
-  position: absolute; top: -6px; left: 6%;
-  font-size: 64px; animation: spin 14s linear infinite;
+  position: absolute; top: -4px; right: 8%;
+  font-size: 66px; animation: pulse 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255,210,90,.6));
 }
-@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.08) rotate(6deg); } }
 
-/* ===== صف الأبطال + البطاقات ===== */
+/* ===== صف الأبطال + البطاقات =====
+   ترتيب ثابت: وطن يسار — البطاقات في الوسط — هند يمين (مثل الصورة) */
 .hero-row {
+  direction: ltr;            /* لتثبيت وطن يساراً وهند يميناً حتى مع RTL */
   display: grid;
-  grid-template-columns: minmax(120px, 230px) 1fr minmax(120px, 230px);
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: end;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .hero-char {
-  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
   animation: bob 4s ease-in-out infinite;
 }
 .hero-right { animation-delay: 1.2s; }
 .hero-char img {
-  width: 100%; height: auto; display: block;
+  height: auto; width: auto; display: block;
   filter: drop-shadow(0 12px 14px rgba(0,0,0,.2));
 }
-/* عكس الطفلين ليواجها البطاقات في المنتصف */
-.hero-left img,
-.hero-right img { transform: scaleX(-1); }
+/* وطن هو المرجع، وهند 75% من طوله */
+.hero-left  img { height: var(--watan-h); }
+.hero-right img { height: calc(var(--watan-h) * 0.75); }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
 .char-name {
@@ -91,7 +118,8 @@ body {
 .cards {
   align-self: center;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
+  justify-content: center;
   gap: 18px;
   padding: 6px;
 }
@@ -142,46 +170,35 @@ body {
 
 /* ===== أجهزة لوحية متوسطة ===== */
 @media (max-width: 900px) {
-  .hero-row { grid-template-columns: minmax(90px, 150px) 1fr minmax(90px, 150px); gap: 6px; }
-  .game-card { min-height: 170px; padding: 16px 12px; }
-  .card-icon { font-size: 2.4rem; }
-  .card-title { font-size: 1.15rem; }
+  :root { --watan-h: clamp(180px, 30vw, 300px); }
+  .hero-row { gap: 4px; }
+  .game-card { min-height: 160px; padding: 14px 10px; }
+  .card-icon { font-size: 2.2rem; }
+  .card-title { font-size: 1.05rem; }
+  .cards { gap: 12px; }
 }
 
-/* ===== الموبايل: الطفلان فوق والبطاقات بالعرض الكامل ===== */
-@media (max-width: 680px) {
-  .stage { padding: 18px 14px 30px; }
-  .hero-head { padding-top: 40px; }
-  .sun { font-size: 42px; top: -34px; left: 50%; transform: translateX(-50%); }
-  @keyframes spin { from { transform: translateX(-50%) rotate(0); } to { transform: translateX(-50%) rotate(360deg); } }
-  .school-name { font-size: 1.2rem; }
-
-  /* تحويل الصف إلى عمود: الطفلان في صف علوي ثم البطاقات */
-  .hero-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 8px;
-  }
-  .hero-char { flex: 1 1 0; max-width: 46%; min-width: 120px; }
-  .hero-left  { order: 1; }
-  .hero-right { order: 2; }
-  .cards {
-    order: 3;
-    flex: 1 1 100%;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px;
-    margin-top: 6px;
-  }
-  .char-name { font-size: .9rem; padding: 2px 12px; }
+/* ===== الموبايل: نفس الترتيب — وطن وهند على الجانبين والبطاقات بينهما ===== */
+@media (max-width: 640px) {
+  :root { --watan-h: clamp(150px, 38vw, 220px); }
+  .stage { padding: 16px 10px 24px; border-width: 4px; }
+  .sun { font-size: 38px; right: 2%; top: 2px; }
+  .school-name { font-size: 1.1rem; }
+  .main-title { font-size: 1.6rem; }
+  .hero-row { gap: 3px; }
+  .cards { grid-template-columns: minmax(0, 240px); gap: 10px; padding: 2px; }
+  .game-card { min-height: 0; padding: 14px 8px; border-width: 3px; }
+  .card-icon { font-size: 2rem; margin-bottom: 4px; }
+  .card-title { font-size: 1rem; }
+  .card-desc { font-size: .78rem; }
+  .play-btn { padding: 6px 18px; font-size: .9rem; }
+  .char-name { font-size: .8rem; padding: 2px 10px; }
 }
 
-/* ===== موبايل صغير: بطاقة واحدة بالصف ===== */
+/* ===== موبايل صغير جداً ===== */
 @media (max-width: 380px) {
-  .cards { grid-template-columns: 1fr; }
-  .hero-char { max-width: 48%; }
+  :root { --watan-h: 138px; }
+  .main-title { font-size: 1.7rem; }
 }
 
 /* ===========================================================
