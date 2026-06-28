@@ -264,7 +264,21 @@ body {
   box-shadow: 0 6px 18px rgba(0,0,0,.07); margin-bottom: 20px;
 }
 .dash-section h2 { color: #2f4f7f; font-size: 1.2rem; margin-bottom: 14px; }
-.dash-note { color: #6b7280; font-size: .9rem; margin-bottom: 14px; }
+.dash-note { color: #6b7280; font-size: .9rem; margin-bottom: 14px; line-height: 1.7; }
+.dash-note a { color: #4a6fa5; font-weight: 700; }
+
+/* قسم GitHub */
+.gh-section { border: 1px solid #e3e9f0; }
+.gh-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.gh-row input {
+  flex: 1; min-width: 200px; padding: 11px 13px; font-family: inherit; font-size: 1rem;
+  border: 2px solid #d7dee6; border-radius: 10px;
+}
+.gh-row input:focus { outline: none; border-color: #4a6fa5; }
+.gh-row .dash-btn { width: auto; flex: 0 0 auto; }
+.gh-status { margin-top: 12px; font-weight: 700; font-size: .92rem; color: #6b7280; }
+.gh-status.ok  { color: #2f8a4e; }
+.gh-status.err { color: #d23b3b; }
 
 .game-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .game-form label { display: flex; flex-direction: column; gap: 5px; font-weight: 700; color: #374151; font-size: .92rem; }

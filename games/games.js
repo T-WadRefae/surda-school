@@ -16,8 +16,11 @@ window.SECTIONS = [
   { id: "history", title: "التاريخ الفلسطيني",  icon: "🗝️", color: "gold"   }
 ];
 
-/* الألعاب الأساسية (كل لعبة لها section) */
-window.DEFAULT_GAMES = [
+/* مسار ملف البيانات الدائم (المصدر الحقيقي للألعاب) */
+window.GAMES_DATA_URL = "games-data.json";
+
+/* قائمة احتياطية تُستخدم فقط إذا تعذّر تحميل games-data.json */
+window.FALLBACK_GAMES = [
   {
     id: "english-1",
     title: "تعلّم الإنجليزية",

@@ -5,8 +5,6 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "surda_camp_games";
-
   var COLORS = {
     green:  "card-green",
     blue:   "card-blue",
@@ -16,16 +14,23 @@
     teal:   "card-teal"
   };
 
-  function getCustomGames() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) {
-      return [];
-    }
+  // الألعاب تُحمّل من games-data.json (المصدر الدائم)
+  var GAMES = null;
+
+  function loadGames() {
+    var url = (window.GAMES_DATA_URL || "games-data.json") + "?cb=" + Date.now();
+    return fetch(url, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function (data) {
+        GAMES = (data && Array.isArray(data.games)) ? data.games : [];
+      })
+      .catch(function () {
+        // احتياطي عند تعذّر التحميل
+        GAMES = window.FALLBACK_GAMES || [];
+      });
   }
 
-  function getAllGames()  { return (window.DEFAULT_GAMES || []).concat(getCustomGames()); }
+  function getAllGames()  { return GAMES || []; }
   function getSections()  { return window.SECTIONS || []; }
 
   function gamesInSection(id) {
@@ -124,7 +129,11 @@
     else     renderSections(wrap, bar);
   }
 
-  document.addEventListener("DOMContentLoaded", render);
-  window.addEventListener("hashchange", render);
-  window.addEventListener("focus", render);
+  function boot() {
+    loadGames().then(render);
+  }
+
+  document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("hashchange", function () { if (GAMES) render(); else boot(); });
+  window.addEventListener("focus", boot);
 })();
