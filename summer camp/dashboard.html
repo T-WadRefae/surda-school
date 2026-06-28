@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>لوحة التحكم – مخيم سردا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dash-body">
+
+  <!-- ===== شاشة كلمة المرور ===== -->
+  <div class="lock-screen" id="lock-screen">
+    <div class="lock-box">
+      <div class="lock-icon">🔐</div>
+      <h1>لوحة التحكم</h1>
+      <p>هذه الصفحة خاصة بالمشرفين فقط</p>
+      <input type="password" id="pass-input" placeholder="كلمة المرور" autocomplete="off" />
+      <button class="dash-btn" id="pass-btn">دخول</button>
+      <div class="lock-error" id="lock-error"></div>
+    </div>
+  </div>
+
+  <!-- ===== لوحة التحكم ===== -->
+  <main class="dash" id="dash" hidden>
+    <header class="dash-head">
+      <h1>🎮 إدارة ألعاب المخيم</h1>
+      <a href="index.html" class="dash-link">← العودة للصفحة الرئيسية</a>
+    </header>
+
+    <!-- إضافة لعبة -->
+    <section class="dash-section">
+      <h2>➕ إضافة لعبة جديدة</h2>
+      <form id="game-form" class="game-form">
+        <label>
+          اسم اللعبة
+          <input type="text" id="g-title" required placeholder="مثال: اللغة الإنجليزية" />
+        </label>
+        <label>
+          وصف قصير (اختياري)
+          <input type="text" id="g-desc" placeholder="مثال: تعلّم الإنجليزية باللعب" />
+        </label>
+        <label>
+          الرمز (إيموجي)
+          <input type="text" id="g-icon" maxlength="4" placeholder="🎮" />
+        </label>
+        <label>
+          اللون
+          <select id="g-color">
+            <option value="green">أخضر</option>
+            <option value="blue">أزرق</option>
+            <option value="purple">بنفسجي</option>
+            <option value="gold">ذهبي</option>
+            <option value="pink">وردي</option>
+            <option value="teal">فيروزي</option>
+          </select>
+        </label>
+        <label class="full">
+          رابط اللعبة
+          <input type="text" id="g-link" placeholder="https://… أو اتركه فارغاً" />
+        </label>
+        <button type="submit" class="dash-btn">حفظ اللعبة</button>
+      </form>
+    </section>
+
+    <!-- قائمة الألعاب المُضافة -->
+    <section class="dash-section">
+      <h2>📋 الألعاب المُضافة</h2>
+      <p class="dash-note">الألعاب الأساسية (مثل بطاقة الإنجليزية) ثابتة وتظهر للجميع. الألعاب التي تضيفها هنا تُحفظ على هذا الجهاز.</p>
+      <div id="game-list" class="game-list"></div>
+    </section>
+  </main>
+
+  <script src="games.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
