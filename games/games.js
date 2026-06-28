@@ -9,11 +9,11 @@
 
 /* الأقسام المتاحة */
 window.SECTIONS = [
-  { id: "english", title: "اللغة الإنجليزية",   icon: "🔤", color: "green"  },
-  { id: "arabic",  title: "اللغة العربية",      icon: "📖", color: "teal"   },
-  { id: "math",    title: "الرياضيات",          icon: "🔢", color: "blue"   },
-  { id: "science", title: "العلوم",             icon: "🔬", color: "purple" },
-  { id: "history", title: "التاريخ الفلسطيني",  icon: "🗝️", color: "gold"   }
+  { id: "english", title: "اللغة الإنجليزية",   icon: "💂🏻‍♂️🔤", color: "green"  },
+  { id: "arabic",  title: "اللغة العربية",      icon: "🪶📖", color: "teal"   },
+  { id: "math",    title: "الرياضيات",          icon: "🧮🔢", color: "blue"   },
+  { id: "science", title: "العلوم",             icon: "🔬🧪", color: "purple" },
+  { id: "history", title: "التاريخ الفلسطيني",  icon: "🧭🗝️", color: "gold"   }
 ];
 
 /* مسار ملف البيانات الدائم (المصدر الحقيقي للألعاب) */
