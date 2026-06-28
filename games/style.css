@@ -170,6 +170,7 @@ body {
 
 /* بطاقة القسم: واضح إنها قابلة للضغط بالكامل */
 .game-card[data-section] { cursor: pointer; }
+.game-card.is-empty { opacity: .82; }
 
 .play-btn {
   margin-top: 14px;

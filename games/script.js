@@ -79,22 +79,24 @@
     bar.hidden = true;
     bar.innerHTML = "";
 
-    var secs = sectionsWithGames();
+    // نعرض كل الأقسام دائماً (مثل بطاقات المواد في الصورة المرجعية)
+    var secs = getSections();
     if (!secs.length) {
-      wrap.innerHTML = '<div class="cards-loading">لا توجد ألعاب بعد</div>';
+      wrap.innerHTML = '<div class="cards-loading">لا توجد أقسام بعد</div>';
       return;
     }
 
     wrap.innerHTML = secs.map(function (s) {
       var n = gamesInSection(s.id).length;
-      var label = n + " " + (n === 1 ? "لعبة" : (n === 2 ? "لعبتان" : "ألعاب"));
+      var hasGames = n > 0;
+      var label = hasGames ? (n + " " + (n === 1 ? "لعبة" : (n === 2 ? "لعبتان" : "ألعاب"))) : "قريباً";
       return (
-        '<article class="game-card ' + (COLORS[s.color] || COLORS.green) + '" data-section="' + esc(s.id) + '">' +
+        '<article class="game-card ' + (COLORS[s.color] || COLORS.green) + (hasGames ? '' : ' is-empty') + '" data-section="' + esc(s.id) + '">' +
           '<div class="card-icon">' + esc(s.icon || "📚") + '</div>' +
           '<h3 class="card-title">' + esc(s.title) + '</h3>' +
           (s.desc ? '<p class="card-desc">' + esc(s.desc) + '</p>' : '') +
           '<p class="card-count">' + label + '</p>' +
-          '<button class="play-btn" type="button">ادخل</button>' +
+          '<button class="play-btn" type="button">' + (hasGames ? 'ادخل' : 'قريباً') + '</button>' +
         '</article>'
       );
     }).join("");
