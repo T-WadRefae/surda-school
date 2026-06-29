@@ -83,8 +83,10 @@
     bar.hidden = true;
     bar.innerHTML = "";
 
-    // نعرض كل الأقسام دائماً (مثل بطاقات المواد في الصورة المرجعية)
-    var secs = getSections();
+    // نعرض الأقسام التي فيها ألعاب + الأقسام المعلَّمة always (تظهر دائماً)
+    var secs = getSections().filter(function (s) {
+      return s.always || gamesInSection(s.id).length > 0;
+    });
     if (!secs.length) {
       wrap.innerHTML = '<div class="cards-loading">لا توجد أقسام بعد</div>';
       return;
