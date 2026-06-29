@@ -42,6 +42,13 @@
     .card-teams { background: linear-gradient(160deg, #5b86bf, #2f4f7f); }
     .card-games { background: linear-gradient(160deg, #6fae72, #3f7d54); }
     footer { margin-top: 34px; color: #6b7a5a; font-weight: 600; text-align: center; }
+    .credit {
+      margin-top: 8px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+      font-size: .85rem; color: #7a8a66; font-weight: 700;
+    }
+    .credit-sep { opacity: .6; }
+    @media (max-width: 480px) { .credit-sep { display: none; } }
   </style>
 </head>
 <body>
@@ -61,6 +68,13 @@
     </a>
   </nav>
 
-  <footer>مدرسة سردا الأساسية المختلطة</footer>
+  <footer>
+    مدرسة سردا الأساسية المختلطة
+    <div class="credit">
+      <span dir="ltr">Designed with 🫶🏻 by T. Wad Refae</span>
+      <span class="credit-sep">·</span>
+      <span>صُمّم بحب 🫶🏻 أ. وعد رفاعي</span>
+    </div>
+  </footer>
 </body>
 </html>

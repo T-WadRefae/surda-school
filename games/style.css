@@ -201,6 +201,13 @@ body {
   text-align: center; padding: 18px; margin-top: 20px;
   color: #6b7a5a; font-weight: 600;
 }
+.credit {
+  margin-top: 8px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+  font-size: .85rem; color: #7a8a66; font-weight: 700;
+}
+.credit-sep { opacity: .6; }
+@media (max-width: 480px) { .credit-sep { display: none; } }
 
 /* ===== أجهزة لوحية متوسطة ===== */
 @media (max-width: 900px) {

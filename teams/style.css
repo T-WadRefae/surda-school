@@ -725,6 +725,13 @@ body {
   font-size: 0.85rem;
   margin-top: 20px;
 }
+.site-footer .credit {
+  margin-top: 8px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+  font-size: .82rem; color: rgba(255,255,255,0.85); font-weight: 700;
+}
+.site-footer .credit-sep { opacity: .5; }
+@media (max-width: 480px) { .site-footer .credit-sep { display: none; } }
 
 /* ===== REFRESH BAR ===== */
 .refresh-bar {
