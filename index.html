@@ -26,7 +26,7 @@
     .sub { color: #6b7a5a; font-weight: 700; font-size: 1.1rem; margin: 0 0 30px; text-align: center; }
     .gate {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px; width: 100%; max-width: 620px;
+      gap: 20px; width: 100%; max-width: 1000px;
     }
     .gate a {
       text-decoration: none; color: #fff; border-radius: 20px; padding: 30px 22px;
@@ -41,6 +41,8 @@
     .gate .desc { font-size: .95rem; opacity: .92; text-shadow: 0 1px 3px rgba(0,0,0,.3); }
     .card-teams { background: linear-gradient(160deg, #5b86bf, #2f4f7f); }
     .card-games { background: linear-gradient(160deg, #6fae72, #3f7d54); }
+    .card-schedule { background: linear-gradient(160deg, #c98b4b, #9a5f2c); }
+    .card-cover { background: linear-gradient(160deg, #a86a8f, #6e3f60); }
     footer { margin-top: 34px; color: #6b7a5a; font-weight: 600; text-align: center; }
     .credit {
       margin-top: 8px;
@@ -60,6 +62,16 @@
       <span class="icon">📅</span>
       <span class="title">جدول الحصص</span>
       <span class="desc">حصص Microsoft Teams اليومية</span>
+    </a>
+    <a href="schedule/" class="card-schedule">
+      <span class="icon">🗓️</span>
+      <span class="title">الجدول المدرسي</span>
+      <span class="desc">الجدول الأسبوعي للصفوف والمعلمات</span>
+    </a>
+    <a href="schedule/cover.html" class="card-cover">
+      <span class="icon">🔄</span>
+      <span class="title">إشغال الغياب</span>
+      <span class="desc">جدول بديل عند غياب معلمة</span>
     </a>
     <a href="games/" class="card-games">
       <span class="icon">🎮</span>
